@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Model
+class Page extends Model
 {
+    
     use HasFactory,Sluggable;
-
+    protected $table = 'posts';
     public function sluggable(){
         return [
             'slug' => [
@@ -18,19 +19,12 @@ class Post extends Model
         ];
     }
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class , 'category_id' , 'id');
     }
     public function user(){
-        return $this->belongsTo(User::class);
-    }
-    
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
-    
+        return $this->belongsTo(User::class , 'user_id' , 'id');
+    } 
     public function media(){
-        return $this->hasMany(PostMedia::class);
+        return $this->hasMany(PostMedia::class,'post_id' , 'id');
     }
-    
-    
 }

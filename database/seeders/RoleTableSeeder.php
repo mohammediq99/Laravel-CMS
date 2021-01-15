@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use \App\Models\Role;
-use \App\Models\User;
+
+use App\Models\Role;
+use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory;
 
@@ -28,7 +29,7 @@ class RoleTableSeeder extends Seeder
         'email' => 'admin@cms.com',
         'mobile' => '07832847233',
         'email_verified_at' => Carbon::now(),
-        'password' => Hash::create('123456789'),
+        'password' => bcrypt('123123123'),
         'status' => 1,
         ]);
         $admin->attachRole($adminRole);
@@ -38,7 +39,7 @@ class RoleTableSeeder extends Seeder
             'email' => 'editor@cms.com',
             'mobile' => '02832847233',
             'email_verified_at' => Carbon::now(),
-            'password' => Hash::create('123456789'),
+            'password' => bcrypt('123123123'),
             'status' => 1,
             ]);
             $editor->attachRole($editorRole);
@@ -48,7 +49,7 @@ class RoleTableSeeder extends Seeder
                 'email' => 'user1@cms.com',
                 'mobile' => '02832841233',
                 'email_verified_at' => Carbon::now(),
-                'password' => Hash::create('123456789'),
+                'password' => bcrypt('123123123'),
                 'status' => 1,
                 ]);
                 $user1->attachRole($userRole);
@@ -58,20 +59,20 @@ class RoleTableSeeder extends Seeder
                     'email' => 'user2@cms.com',
                     'mobile' => '02822847233',
                     'email_verified_at' => Carbon::now(),
-                    'password' => Hash::create('123456789'),
+                    'password' => bcrypt('123123123'),
                     'status' => 1,
                 ]);
-                $user->attachRole($userRole);
-                $user = User::create([
+                $user2->attachRole($userRole);
+                $user3 = User::create([
                         'name' => 'user3',
                         'username' => 'user3',
                         'email' => 'user3@cms.com',
                         'mobile' => '02821847233',
                         'email_verified_at' => Carbon::now(),
-                        'password' => Hash::create('123456789'),
+                        'password' => bcrypt('123123123'),
                         'status' => 1,
                 ]);
-                $user->attachRole($userRole);
+                $user3->attachRole($userRole);
                for ($i=0; $i < 20 ; $i++) { 
                   
                 $user  = User::create([
@@ -80,7 +81,7 @@ class RoleTableSeeder extends Seeder
                     'email' =>   $faker->email,
                     'mobile' => random_int(10000000 , 99999999),
                     'email_verified_at' => Carbon::now(),
-                    'password' => Hash::create('123456789'),
+                    'password' => bcrypt('123123123'),
                     'status' => 1,
             ]);
             $user->attachRole($userRole);
