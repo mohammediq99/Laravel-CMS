@@ -48,3 +48,13 @@ Route::group(['prefix' => 'admin' ] , function (){
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::get('/contact-us',       ['as' => 'frontend.contact' ,     'uses' => 'Frontend\IndexController@contact']);
+Route::post('/contact-us',      ['as' => 'frontend.contact' ,     'uses' => 'Frontend\IndexController@do_contact']);
+
+
+Route::get('/search',            ['as' => 'frontend.search' ,           'uses' => 'Frontend\IndexController@search']);
+Route::get('/{post}',            ['as' => 'post.show' ,           'uses' => 'Frontend\IndexController@post_show']);
+Route::post('/{post}',           ['as' => 'posts.add_comments' ,  'uses' => 'Frontend\IndexController@store_comment']);

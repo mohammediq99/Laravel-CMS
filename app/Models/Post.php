@@ -5,11 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Post extends Model
 {
-    use HasFactory,Sluggable;
+    use HasFactory,Sluggable,SearchableTrait;
 
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'posts.title' => 10,
+            'posts.description' => 9
+        ] 
+    ];
     public function sluggable(){
         return [
             'slug' => [
@@ -26,6 +40,9 @@ class Post extends Model
     
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+    public function approved_comments(){
+        return $this->hasMany(Comment::class)->whereStatus(1);
     }
     
     public function media(){

@@ -41,6 +41,8 @@
       @include('partial.frontend.header')
     
         <main class="py-4">
+		@include('partial.flash')
+
             @yield('content')
         </main>
       @include('partial.frontend.footer')
@@ -55,5 +57,6 @@
 	<script src="js/bootstrap.min.js"></script> -->
 	<script src="{{ asset('frontend/js/plugins.js') }}"></script>
 	<script src="{{ asset('frontend/js/active.js') }}"></script>
+	<script src="{{ asset('frontend/js/custome.js') }}"></script>
 </body>
 </html>
