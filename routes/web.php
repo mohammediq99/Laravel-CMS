@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',             ['as' => 'frontend.index' , 'uses' => 'Frontend\IndexController@index']);
-
-
+ 
+ 
 // Front end Auth Routes 
 // Auth::routes();
 Route::get('/login',                            ['as' => 'frontend.show_login_form',        'uses' => 'Frontend\Auth\LoginController@showLoginForm']);
@@ -31,6 +31,14 @@ Route::get('email/verify',                      ['as' => 'verification.notice', 
 Route::get('/email/verify/{id}/{hash}',         ['as' => 'verification.verify',             'uses' => 'Frontend\Auth\VerificationController@verify']);
 Route::post('email/resend',                     ['as' => 'verification.resend',             'uses' => 'Frontend\Auth\VerificationController@resend']);
 
+Route::group(['middleware' => 'verified'] ,function () {
+    Route::get('/dashboard',             ['as' => 'frontend.dashboard' , 'uses' => 'Frontend\UsersController@index']);
+    Route::get('/create-post',           ['as' => 'users.post.create' , 'uses' => 'Frontend\UsersController@create_post']);
+    Route::post('/dashboard',            ['as' => 'users.post.store' , 'uses' => 'Frontend\UsersController@store_post']);
+
+
+
+});
 
 /// Admin
 Route::group(['prefix' => 'admin' ] , function (){
@@ -53,6 +61,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/contact-us',       ['as' => 'frontend.contact' ,     'uses' => 'Frontend\IndexController@contact']);
 Route::post('/contact-us',      ['as' => 'frontend.contact' ,     'uses' => 'Frontend\IndexController@do_contact']);
+Route::get('/category/{slug}',  ['as' => 'frontend.category.posts','uses' => 'Frontend\IndexController@category']);
+Route::get('/archive/{date}',   ['as' => 'frontend.archive.posts','uses' => 'Frontend\IndexController@archive']);
+Route::get('/auther/{yser_name}',['as' => 'frontend.auther.posts','uses' => 'Frontend\IndexController@auther']);
 
 
 Route::get('/search',            ['as' => 'frontend.search' ,           'uses' => 'Frontend\IndexController@search']);

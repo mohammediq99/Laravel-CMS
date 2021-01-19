@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Frontend\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Requset;
-class LoginController extends Controller
+use Illuminate\Http\Request ;
+ class LoginController extends Controller
 { 
     /*
     |--------------------------------------------------------------------------
@@ -38,14 +38,22 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function showLoginForm(){
-        return view('frontend.auth.login.view');
+        return view('frontend.auth.login');
     }
     public function username(){
         return 'username';
     }
-    protected function authenticated(Request $request , $user){
-        if($user->status == 0 ){
+    protected function authenticated( $request , $user){
+         if($user->status == 0 ){
             Auth::logout();
+            return redirect()->route('frontend.index')->with([
+                'message' => 'Blocked from logged in ',
+                'alrt-type' => 'alert'
+            ]);
         }
+        return redirect()->route('frontend.dashboard')->with([
+            'message' => 'Logged in successfully',
+            'alrt-type' => 'success'
+        ]);
     }
 }

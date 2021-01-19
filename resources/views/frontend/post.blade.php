@@ -44,7 +44,7 @@
 										<div class="blog-date-categori">
 											<ul>
 												<li>{{ $post->created_at->format('M d, Y')  }} </li>
-												<li><a href="#" title="Posts by {{ $post->user->name }}" rel="author">{{ $post->user->name }}</a></li>
+												<li><a href="{{ route('frontend.auther.posts', $post->user->username)  }}" title="Posts by {{ $post->user->name }}" rel="author">{{ $post->user->name }}</a></li>
 											</ul>
 										</div>
 									</div>
@@ -74,7 +74,7 @@
 											<div class="content">
 												<div class="comnt__author d-block d-sm-flex">
 													<span><a href="{{ $comment->url ? $comment->url : '#'}}">{{ $comment->name }}</a>  </span>
-													<span> {{ $comment->created_at->format('M d Y h:i a')}} October 6, 2014 at 9:26 am</span>
+													<span> {{ $comment->created_at->format('M d Y h:i a')}}  </span>
 												</div>
 												<p>{!! $comment->comment !!}</p>
 											</div>
@@ -92,7 +92,7 @@
 											<div class="thumb">
 												<img src="{{ asset('frontend/images/blog/comment/1.jpeg') }}" alt="comment images">
 											</div>
-											<div class="content">
+											<!-- <div class="content">
 												<div class="comnt__author d-block d-sm-flex">
 													<span><a href="#">admin</a> Post author</span>
 													<span>October 6, 2014 at 9:26 am</span>
@@ -101,7 +101,7 @@
 													</div>
 												</div>
 												<p>Sed interdum at justo in efficitur. Vivamus gravida volutpat sodales. Fusce ornare sit</p>
-											</div>
+											</div> -->
 										</div>
                                     </li>
                                      

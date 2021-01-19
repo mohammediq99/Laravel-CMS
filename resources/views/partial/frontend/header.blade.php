@@ -20,9 +20,10 @@
 								<li class="drop"><a href="javascript:void(0);">Blog</a>
 									<div class="megamenu dropdown">
 										<ul class="item item01">
-
-											<li><a href="#">un categorize</a></li>
- 											
+ 
+								        @foreach($global_categories as $category)
+        					        		<li><a href="{{ route('frontend.category.posts', $category->slug ) }}">{{ $category->name }}</a></li>
+        					            @endforeach
 										</ul>
 									</div>
 								</li>
@@ -33,29 +34,30 @@
 					<div class="col-md-8 col-sm-8 col-5 col-lg-2">
 						<ul class="header__sidebar__right d-flex justify-content-end align-items-center">
 							<li class="shop_search"><a class="search__active" href="#"></a></li>
-							<li class="wishlist"><a href="#"></a></li>
-							<li class="shopcart"><a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
+
+ 							<li class="shopcart"><a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
 								<!-- Start Shopping Cart -->
 								<div class="block-minicart minicart__active">
 									<div class="minicart-content-wrapper">
 										<div class="micart__close">
 											<span>close</span>
 										</div>
-										<div class="items-total d-flex justify-content-between">
+										<!-- <div class="items-total d-flex justify-content-between">
 											<span>3 items</span>
 											<span>Cart Subtotal</span>
-										</div>
-										<div class="total_amount text-right">
+										</div> -->
+										<!-- <div class="total_amount text-right">
 											<span>$66.00</span>
-										</div>
-										<div class="mini_action checkout">
+										</div> -->
+										<!-- <div class="mini_action checkout">
 											<a class="checkout__btn" href="cart.html">Go to Checkout</a>
-										</div>
+										</div> -->
 										<div class="single__items">
 											<div class="miniproduct">
+
 												<div class="item01 d-flex">
 													<div class="thumb">
-														<a href="product-details.html"><img src=" {{ asset('frontend/images/product/sm-img/1.jpg') }}" alt="product images"></a>
+														<a href="product-details.html"><img src=" {{ asset('assets/posts/default_small.jpg') }}" width="50px" height="50px" alt="product images"></a>
 													</div>
 													<div class="content">
 														<h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
@@ -69,96 +71,21 @@
 														</div>
 													</div>
 												</div>
-												<div class="item01 d-flex mt--20">
-													<div class="thumb">
-														<a href="product-details.html"><img src="{{ asset('frontend/images/product/sm-img/3.jpg') }}" alt="product images"></a>
-													</div>
-													<div class="content">
-														<h6><a href="product-details.html">Impulse Duffle</a></h6>
-														<span class="prize">$40.00</span>
-														<div class="product_prize d-flex justify-content-between">
-															<span class="qun">Qty: 03</span>
-															<ul class="d-flex justify-content-end">
-																<li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-																<li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-															</ul>
-														</div>
-													</div>
-												</div>
-												<div class="item01 d-flex mt--20">
-													<div class="thumb">
-														<a href="product-details.html"><img src="{{ asset('frontend/images/product/sm-img/2.jpg') }}" alt="product images"></a>
-													</div>
-													<div class="content">
-														<h6><a href="product-details.html">Compete Track Tote</a></h6>
-														<span class="prize">$40.00</span>
-														<div class="product_prize d-flex justify-content-between">
-															<span class="qun">Qty: 03</span>
-															<ul class="d-flex justify-content-end">
-																<li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-																<li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
+												
+ 											</div>
 										</div>
-										<div class="mini_action cart">
+										<!-- <div class="mini_action cart">
 											<a class="cart__btn" href="cart.html">View and edit cart</a>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<!-- End Shopping Cart -->
 							</li>
 							<li class="setting__bar__icon"><a class="setting__active" href="#"></a>
 								<div class="searchbar__content setting__block">
-									<div class="content-inner">
-										<div class="switcher-currency">
-											<strong class="label switcher-label">
-												<span>Currency</span>
-											</strong>
-											<div class="switcher-options">
-												<div class="switcher-currency-trigger">
-													<span class="currency-trigger">USD - US Dollar</span>
-													<ul class="switcher-dropdown">
-														<li>GBP - British Pound Sterling</li>
-														<li>EUR - Euro</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="switcher-currency">
-											<strong class="label switcher-label">
-												<span>Language</span>
-											</strong>
-											<div class="switcher-options">
-												<div class="switcher-currency-trigger">
-													<span class="currency-trigger">English01</span>
-													<ul class="switcher-dropdown">
-														<li>English02</li>
-														<li>English03</li>
-														<li>English04</li>
-														<li>English05</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="switcher-currency">
-											<strong class="label switcher-label">
-												<span>Select Store</span>
-											</strong>
-											<div class="switcher-options">
-												<div class="switcher-currency-trigger">
-													<span class="currency-trigger">Fashion Store</span>
-													<ul class="switcher-dropdown">
-														<li>Furniture</li>
-														<li>Shoes</li>
-														<li>Speaker Store</li>
-														<li>Furniture</li>
-													</ul>
-												</div>
-											</div>
-										</div>
+									<div class="content-inner"> 
+											 
+											 
 										<div class="switcher-currency">
 											<strong class="label switcher-label">
 												<span>My Account</span>
@@ -166,12 +93,15 @@
 											<div class="switcher-options">
 												<div class="switcher-currency-trigger">
 													<div class="setting__menu">
-														<span><a href="#">Compare Product</a></span>
-														<span><a href="#">My Account</a></span>
-														<span><a href="#">My Wishlist</a></span>
-														<span><a href="#">Sign In</a></span>
-														<span><a href="#">Create An Account</a></span>
-													</div>
+														 @guest
+														 <span><a href="{{ route('frontend.show_login_form') }}">{{ __('Login')}}</a></span>
+													     <span><a href="{{ route('frontend.show_register_form') }}">{{ __('Register')}}</a></span>
+ 														@else
+													     <span><a href="{{ route('frontend.dashboard') }}">Dashboard</a></span>
+														<span><a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></span>
+														<form action="{{ route('frontend.logout') }}" method="POST" style="display:none;" id="logout-form"> @csrf </form>
+														@endif
+ 													</div>
 												</div>
 											</div>
 										</div>

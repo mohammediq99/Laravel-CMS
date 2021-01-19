@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;;
 use App\Models\Post;
 use App\Models\Contact;
+use App\Models\Category;
+use App\Models\User;
 class IndexController extends Controller
 {
     public function index(){
@@ -115,5 +117,51 @@ class IndexController extends Controller
 
         $posts = $posts->wherePostType('post')->whereStatus(1)->orderBy('id','desc')->paginate(10);
         return view('frontend.index')->with('posts' , $posts);
+    }
+    public function category($slug){
+        $category = Category::whereSlug($slug)->orWhere('id',$slug)->whereStatus(1)->first()->id;
+        if($category){
+            $posts = Post::with(['media','user','category'])
+            ->withCount('approved_comments')
+            ->whereCategoryId($category)
+            ->wherePostType('post')
+            ->whereStatus(1)
+            ->orderBy('id','desc')
+            ->paginate(5);
+            return view('frontend.index')->with('posts' , $posts);
+        }
+        return redirect()->route('frontend.index');
+
+    }
+    public function archive($date){
+        // Month-Year 01-2021
+        $exploded_date = explode('-',$date);
+        $month = $exploded_date[0];
+        $year = $exploded_date[1];
+        $posts = Post::with(['media','user','category'])
+        ->withCount('approved_comments') 
+        ->whereMonth('created_at' , $month)
+        ->whereYear('created_at' , $year)
+        ->wherePostType('post')
+        ->whereStatus(1)
+        ->orderBy('id','desc')
+        ->paginate(5);
+        return view('frontend.index')->with('posts' , $posts);
+
+    }
+    
+    public function auther($username){
+        $user = User::whereUsername($username)->whereStatus(1)->first()->id;
+        if($user){
+            $posts = Post::with(['media','user','category'])
+            ->withCount('approved_comments')
+            ->whereUserId($user)
+            ->wherePostType('post')
+            ->whereStatus(1)
+            ->orderBy('id','desc')
+            ->paginate(5);
+            return view('frontend.index')->with('posts' , $posts);
+        }
+        return redirect()->route('frontend.index');
     }
 }

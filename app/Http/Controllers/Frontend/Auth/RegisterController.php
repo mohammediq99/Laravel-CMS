@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-
+use Illuminate\Http\Request ;
 class RegisterController extends Controller
 {
     /*
@@ -81,7 +81,7 @@ class RegisterController extends Controller
         ]);
         if(isset($data['user_image'])){
             if($image = $data['user_image']){
-                $filename = Str::slug($data['usename']) . '.' . $image->getClientOriginalExtension();
+                $filename = Str::slug($data['username']) . '.' . $image->getClientOriginalExtension();
                 $path = public_path('asstes/users/' . $filename );
                 Image::make($image->getRealPath())->resize(300,300,function ($constraint){
                     $constraint->aspectRatio();
@@ -89,6 +89,7 @@ class RegisterController extends Controller
                 $user->update(['user_image' => $file_name]);
             }
         }
+        return $user;
     }
     
     protected function registered(Request $request, $user)

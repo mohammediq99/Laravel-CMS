@@ -40,7 +40,15 @@ class VerificationController extends Controller
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
-    public function show(){
-        return $request->user()->hasVerifiedEmail() ? \redirect($this->redirectPath()) : view('frontend.aith.verify');
+    public function show( Request $request){
+        return $request->user()->hasVerifiedEmail() ? redirect($this->redirectPath()) : view('frontend.auth.verify');
+    }
+    public function verified(Request $request){
+        $request->user()->update(['status' => 1]);
+
+        return redirect()->route('frontend.index')->with([
+            'message' => 'Your account verified successfully  ',
+            'alert-type' => 'success'
+        ]);
     }
 }
