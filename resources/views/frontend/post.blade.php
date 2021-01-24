@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="page-blog-details section-padding--lg bg--white">
+<div class="page-blog-details section-padding--lg  col-9 bg--white">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-9 col-12">

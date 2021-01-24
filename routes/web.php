@@ -32,9 +32,23 @@ Route::get('/email/verify/{id}/{hash}',         ['as' => 'verification.verify', 
 Route::post('email/resend',                     ['as' => 'verification.resend',             'uses' => 'Frontend\Auth\VerificationController@resend']);
 
 Route::group(['middleware' => 'verified'] ,function () {
-    Route::get('/dashboard',             ['as' => 'frontend.dashboard' , 'uses' => 'Frontend\UsersController@index']);
-    Route::get('/create-post',           ['as' => 'users.post.create' , 'uses' => 'Frontend\UsersController@create_post']);
-    Route::post('/dashboard',            ['as' => 'users.post.store' , 'uses' => 'Frontend\UsersController@store_post']);
+    Route::get('/dashboard',               ['as' => 'frontend.dashboard' , 'uses' => 'Frontend\UsersController@index']);
+    Route::get('/edite-info',              ['as' => 'users.edit_info' , 'uses' => 'Frontend\UsersController@edit_info']);
+    Route::post('/edite-info',             ['as' => 'users.update_info' , 'uses' => 'Frontend\UsersController@update_info']);
+    Route::post('/edite-password',         ['as' => 'users.update_password' , 'uses' => 'Frontend\UsersController@update_password']);
+    Route::get('/create-post',             ['as' => 'users.post.create' , 'uses' => 'Frontend\UsersController@create_post']);
+    Route::post('/create-post',            ['as' => 'users.post.store' , 'uses' => 'Frontend\UsersController@store_post']);
+    Route::get('/edit-post/{post_id}',     ['as' => 'users.post.edit' , 'uses' => 'Frontend\UsersController@edit_post']);
+    Route::put('/update-post/{post_id}',   ['as' => 'users.post.update' , 'uses' => 'Frontend\UsersController@update_post']);
+    Route::delete('/delete-post/{post_id}',['as' => 'users.post.destroy' , 'uses' => 'Frontend\UsersController@destroy_post']);
+    Route::get('/comments',                ['as' => 'users.comments' , 'uses' => 'Frontend\UsersController@show_comments']);
+    Route::get('/edit-comment/{comment_id}',     ['as' => 'users.comment.edit' , 'uses' => 'Frontend\UsersController@edit_comment']);
+    Route::put('/update-comment/{comment_id}',   ['as' => 'users.comment.update' , 'uses' => 'Frontend\UsersController@update_comment']);
+    Route::delete('/delete-comment/{comment_id}',['as' => 'users.comment.destroy' , 'uses' => 'Frontend\UsersController@destroy_comment']);
+    
+
+
+    Route::post('/delete-post-media/{media_id}' , ['as' => 'users.post.media.destroy', 'uses' => 'Frontend\UsersController@destroy_post_media']);
 
 
 

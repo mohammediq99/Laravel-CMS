@@ -10,7 +10,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 class Post extends Model
 {
     use HasFactory,Sluggable,SearchableTrait;
-
+    protected $guarded = [];
     protected $searchable = [
         /**
          * Columns and their priority in search results.

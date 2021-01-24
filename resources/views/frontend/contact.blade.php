@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
   <!-- Start Contact Area -->
-  <section class="wn_contact_area bg--white pt--80 pb--80">
+  <section class="wn_contact_area bg--white  col-9 pt--80 pb--80">
       
         	<div class="container">
         		<div class="row">

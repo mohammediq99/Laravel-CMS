@@ -3,7 +3,7 @@
 
 
   <!-- Start Blog Area -->
-  <div class="page-blog bg--white section-padding--lg blog-sidebar right-sidebar">
+  <div class="page-blog bg--white section-padding--lg  col-9 blog-sidebar right-sidebar">
         	<div class="container">
         		<div class="row">
         			<div class="col-lg-9 col-12">

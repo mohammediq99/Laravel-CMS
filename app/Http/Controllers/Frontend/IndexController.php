@@ -9,6 +9,8 @@ use App\Models\Post;
 use App\Models\Contact;
 use App\Models\Category;
 use App\Models\User;
+use App\Notifications\NewCommentForPostOwnerNotify;
+use Stevebauman\Purify\Facades\Purify;
 class IndexController extends Controller
 {
     public function index(){
@@ -58,12 +60,15 @@ class IndexController extends Controller
           $userId = auth()->check() ? auth()->id : null;
               $data['name'] = $request->name;
               $data['email'] = $request->email;
-              $data['url'] = $request->url;
+              $data['url'] = $request->url != '' ? $request->url  : '';
               $data['ip_address'] = $request->ip();
-              $data['comment'] = $request->comment;
+              $data['comment'] = Purify::clean($request->comment);
               $data['post_id'] = $post->id;
               $data['user_id'] = $userId;
-              $post->comments()->create($data);
+              $comment = $post->comments()->create($data);
+              if((auth()->guest() || (auth()->id() != $post->user_id)) && $comment ){
+                  $post->user->notify(new NewCommentForPostOwnerNotify($comment));
+              }
             //   Comment::create($data);
             return redirect()->back()->with([
                 'message' => 'comment added successfully',
@@ -93,7 +98,7 @@ class IndexController extends Controller
         $data['email'] = $request->email;
         $data['mobile'] = $request->mobile;
         $data['title'] = $request->title;
-        $data['message'] = $request->message;
+        $data['message'] = Purify::clean($request->message);
         Contact::create($data);
         return redirect()->back()->with([
             'message' => 'Message sent successfully',
